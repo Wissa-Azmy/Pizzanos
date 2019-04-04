@@ -80,7 +80,8 @@ class ViewController: UIViewController {
             let content = makePizzaContent()
             pizzaNumber += 1
             content.subtitle = "Pizza \(pizzaNumber)"
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
             addNotification(trigger: trigger, content: content, identifier: "message.pizza.\(pizzaNumber)")
         }
     }
@@ -131,7 +132,11 @@ class ViewController: UIViewController {
     
     @IBAction func removeBtn(_ sender: UIButton) {
         if isGrantedNotificationAccess {
-            
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+                if let request = requests.first {
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [request.identifier])
+                }
+            }
         }
     }
 }
