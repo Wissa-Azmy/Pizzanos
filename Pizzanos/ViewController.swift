@@ -12,6 +12,7 @@ import UserNotifications
 class ViewController: UIViewController {
     
     var isGrantedNotificationAccess = false
+    var pizzaNumber = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +61,10 @@ class ViewController: UIViewController {
     @IBAction func makeBtn(_ sender: UIButton) {
         if isGrantedNotificationAccess {
             let content = makePizzaContent()
+            pizzaNumber += 1
+            content.subtitle = "Pizza \(pizzaNumber)"
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
-            addNotification(trigger: trigger, content: content, identifier: "message.pizza")
+            addNotification(trigger: trigger, content: content, identifier: "message.pizza.\(pizzaNumber)")
         }
     }
 
@@ -73,13 +76,25 @@ class ViewController: UIViewController {
     
     @IBAction func viewPendingBtn(_ sender: UIButton) {
         if isGrantedNotificationAccess {
-            
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+                print("\(Date()) --> \(requests.count) pending notifications...")
+                
+                for request in requests {
+                    print("\(request.identifier) with Body: \(request.content.body)")
+                }
+            }
         }
     }
     
     @IBAction func viewDeliveredBtn(_ sender: UIButton) {
         if isGrantedNotificationAccess {
-            
+            UNUserNotificationCenter.current().getDeliveredNotifications { (notifications) in
+                print("\n\n\(Date()) --> \(notifications.count) delivered notifications.")
+                
+                for notification in notifications {
+                    print("\(notification.request.identifier) with Body: \(notification.request.content.body)")
+                }
+            }
         }
     }
     
