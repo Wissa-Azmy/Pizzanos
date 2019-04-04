@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     var isGrantedNotificationAccess = false
     var pizzaNumber = 0
+    let pizzaSteps = ["Make Pizza", "Roll Dough", "Add Sauce", "Add Cheese", "Bake", "Done"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +25,22 @@ class ViewController: UIViewController {
             if !granted {
                 // Show uesr alert complaininng
             }
+        }
+    }
+    
+    // Update Notification content before read by the user while it's still in the pending notification queue.
+    private func updatePizzaSteps(request: UNNotificationRequest) {
+        if request.identifier.hasPrefix("message.pizza") {
+            // content.userInfo property is set in the makePizzaContent method
+            var stepNumber = request.content.userInfo["step"] as! Int
+            // Need clarification on the % operator usage here
+            stepNumber = (stepNumber + 1) % pizzaSteps.count
+            let updatedContent = makePizzaContent()
+            updatedContent.body = pizzaSteps[stepNumber]
+            updatedContent.subtitle = request.content.subtitle
+            updatedContent.userInfo["step"] = stepNumber
+            // Re-adding the notification to the pending queue with the same identifier will remove the old one
+            addNotification(trigger: request.trigger, content: updatedContent, identifier: request.identifier)
         }
     }
 
@@ -70,7 +87,21 @@ class ViewController: UIViewController {
 
     @IBAction func nextBtn(_ sender: UIButton) {
         if isGrantedNotificationAccess {
-            
+            UNUserNotificationCenter.current().getPendingNotificationRequests { (requests) in
+                if let request = requests.first {
+                    if request.identifier.hasPrefix("message.pizza") {
+                        // Send notification request to the Update method for the request to be updated with the new content.
+                        self.updatePizzaSteps(request: request)
+                    } else {
+                        // If first message doesn't has 'message.pizza' identifier
+                        // Then re-add it to the end of the pending notification queue to get to the one that follows in the next Btn tap
+                        // Using the unique identifier the pending notification queue doesn't allow duplicates,
+                        // so the first one will be removed.
+                        let content = request.content.mutableCopy() as! UNMutableNotificationContent
+                        self.addNotification(trigger: request.trigger, content: content, identifier: request.identifier)
+                    }
+                }
+            }
         }
     }
     
@@ -107,6 +138,7 @@ class ViewController: UIViewController {
 
 
 extension ViewController: UNUserNotificationCenterDelegate {
+    // To enable in-App notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.sound,.alert])
     }
