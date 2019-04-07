@@ -49,6 +49,7 @@ class ViewController: UIViewController {
         content.title = "Making pizza"
         content.body = "A timed Pizza step"
         content.userInfo = ["step": 0]
+        content.categoryIdentifier = "pizza.category"
         
         return content
     }
@@ -67,6 +68,7 @@ class ViewController: UIViewController {
             let content = UNMutableNotificationContent()
             content.title = "A scheduled Pizza"
             content.body = "Time to make Pizza"
+            content.categoryIdentifier = "schedule.category"
             let dateComps: Set<Calendar.Component> = [.second,.hour,.minute]
             var date = Calendar.current.dateComponents(dateComps, from: Date())
             date.second = date.second! + 15
@@ -80,8 +82,8 @@ class ViewController: UIViewController {
             let content = makePizzaContent()
             pizzaNumber += 1
             content.subtitle = "Pizza \(pizzaNumber)"
-//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+//            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
             addNotification(trigger: trigger, content: content, identifier: "message.pizza.\(pizzaNumber)")
         }
     }
@@ -146,6 +148,30 @@ extension ViewController: UNUserNotificationCenterDelegate {
     // To enable in-App notification
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.sound,.alert])
+    }
+    
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        let action = response.actionIdentifier
+        let request = response.notification.request
+        
+        if action == "next.action" {
+            updatePizzaSteps(request: request)
+        } else if action == "stop.action" {
+            // This line is useless if the trigger repeat value is false meaning that it's not a repeating notification
+            // for the current one that receiving the action has already been removed from the peding queue
+            UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [request.identifier])
+        } else {
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 05, repeats: false)
+            let newRequest = UNNotificationRequest(identifier: request.identifier, content: request.content, trigger: trigger)
+            UNUserNotificationCenter.current().add(newRequest) { (error) in
+                if error != nil {
+                    print("\(error!.localizedDescription)")
+                }
+            }
+        }
+        
+        completionHandler()
     }
 }
 

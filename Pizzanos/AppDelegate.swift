@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,8 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
+    func setCategories() {
+        let next = UNNotificationAction(identifier: "next.action", title: "Next", options: [])
+        let stop = UNNotificationAction(identifier: "stop.action", title: "Stop", options: [])
+        let snooze = UNNotificationAction(identifier: "snooze.action", title: "Snooze", options: [])
+        
+        let pizzaCategory = UNNotificationCategory(identifier: "pizza.category", actions: [next, stop], intentIdentifiers: [], options: [])
+        let scheduleCategory = UNNotificationCategory(identifier: "schedule.category", actions: [snooze], intentIdentifiers: [], options: [])
+        
+        UNUserNotificationCenter.current().setNotificationCategories([pizzaCategory, scheduleCategory])
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setCategories()
         return true
     }
 
