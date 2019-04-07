@@ -161,6 +161,11 @@ extension ViewController: UNUserNotificationCenterDelegate {
             // This line is useless if the trigger repeat value is false meaning that it's not a repeating notification
             // for the current one that receiving the action has already been removed from the peding queue
             UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [request.identifier])
+        } else if action == "text.input" {
+            let textResponse = response as! UNTextInputNotificationResponse
+            let newContent = request.content.mutableCopy() as! UNMutableNotificationContent
+            newContent.subtitle = textResponse.userText
+            addNotification(trigger: request.trigger, content: newContent, identifier: request.identifier)
         } else {
             let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 05, repeats: false)
             let newRequest = UNNotificationRequest(identifier: request.identifier, content: request.content, trigger: trigger)

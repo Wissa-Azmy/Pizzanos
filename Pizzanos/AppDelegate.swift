@@ -19,8 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let next = UNNotificationAction(identifier: "next.action", title: "Next", options: [])
         let stop = UNNotificationAction(identifier: "stop.action", title: "Stop", options: [])
         let snooze = UNNotificationAction(identifier: "snooze.action", title: "Snooze", options: [])
+        let textInputAction = UNTextInputNotificationAction(identifier: "text.input", title: "Comment", options: [])
         
-        let pizzaCategory = UNNotificationCategory(identifier: "pizza.category", actions: [next, stop], intentIdentifiers: [], options: [])
+        let pizzaCategory = UNNotificationCategory(identifier: "pizza.category", actions: [next, stop, textInputAction], intentIdentifiers: [], options: [])
         let scheduleCategory = UNNotificationCategory(identifier: "schedule.category", actions: [snooze], intentIdentifiers: [], options: [])
         
         UNUserNotificationCenter.current().setNotificationCategories([pizzaCategory, scheduleCategory])
