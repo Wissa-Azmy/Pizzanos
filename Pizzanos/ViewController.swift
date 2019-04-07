@@ -12,8 +12,8 @@ import UserNotifications
 class ViewController: UIViewController {
     
     var isGrantedNotificationAccess = false
-    var pizzaNumber = 0
-    let pizzaSteps = ["Make Pizza", "Roll Dough", "Add Sauce", "Add Cheese", "Bake", "Done"]
+    var pizzaStepNumber = 0
+    let pizzaSteps = ["Make Pizza", "Roll Dough", "Add Sauce", "Add Cheese", "Add other ingredients", "Bake", "Done"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +39,7 @@ class ViewController: UIViewController {
             updatedContent.body = pizzaSteps[stepNumber]
             updatedContent.subtitle = request.content.subtitle
             updatedContent.userInfo["step"] = stepNumber
+            updatedContent.attachments = pizzaStepImg(step: stepNumber)
             // Re-adding the notification to the pending queue with the same identifier will remove the old one
             addNotification(trigger: request.trigger, content: updatedContent, identifier: request.identifier)
         }
@@ -69,9 +70,11 @@ class ViewController: UIViewController {
             content.title = "A scheduled Pizza"
             content.body = "Time to make Pizza"
             content.categoryIdentifier = "schedule.category"
+//            content.attachments = notificationAttachment(for: "pizza.video", resource: "PizzaMovie", type: "mp4")
+            content.attachments = notificationAttachment(for: "EHuliUke.music", resource: "EHuliUke", type: "mp3")
             let dateComps: Set<Calendar.Component> = [.second,.hour,.minute]
             var date = Calendar.current.dateComponents(dateComps, from: Date())
-            date.second = date.second! + 15
+            date.second = date.second! + 5
             let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: false)
             addNotification(trigger: trigger, content: content, identifier: "message.scheduled")
         }
@@ -80,11 +83,13 @@ class ViewController: UIViewController {
     @IBAction func makeBtn(_ sender: UIButton) {
         if isGrantedNotificationAccess {
             let content = makePizzaContent()
-            pizzaNumber += 1
-            content.subtitle = "Pizza \(pizzaNumber)"
-            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+            content.subtitle = pizzaSteps[pizzaStepNumber]
+//            content.attachments = pizzaStepImg(step: pizzaStepNumber)
+            content.attachments = pizzaGif()
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 2.0, repeats: false)
 //            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 60.0, repeats: true)
-            addNotification(trigger: trigger, content: content, identifier: "message.pizza.\(pizzaNumber)")
+            addNotification(trigger: trigger, content: content, identifier: "message.pizza.\(pizzaStepNumber)")
+            pizzaStepNumber += 1
         }
     }
 
@@ -140,6 +145,52 @@ class ViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    // MARK: - Attachments methods
+    func pizzaStepImg(step: Int) -> [UNNotificationAttachment] {
+        let stepString = String(step)
+        let identifier = "pizza.step" + stepString
+        let resource = "MakePizza_" + stepString
+        
+        return notificationAttachment(for: identifier, resource: resource, type: "jpg")
+    }
+    
+    
+    func pizzaGif() -> [UNNotificationAttachment] {
+        
+        guard let path = Bundle.main.path(forResource: "MakePizza_0", ofType: "gif") else {return[]}
+        let fileURL = URL(fileURLWithPath: path)
+        
+        do {
+            let attachment = try UNNotificationAttachment(
+                identifier: "pizza.gif",
+                url: fileURL,
+                // Change the frame you want to use as your Gif thumbnail
+                options: [UNNotificationAttachmentOptionsThumbnailTimeKey: 11]
+            )
+            return [attachment]
+        } catch let error {
+            print("\(error.localizedDescription)")
+        }
+        
+        return []
+    }
+
+    
+    func notificationAttachment(for identifier: String, resource: String, type: String) -> [UNNotificationAttachment] {
+        let extendedIdentifier = identifier + "." + type
+        guard let path = Bundle.main.path(forResource: resource, ofType: type) else {return[]}
+        let fileURL = URL(fileURLWithPath: path)
+        
+        do {
+            let attachment = try UNNotificationAttachment(identifier: extendedIdentifier, url: fileURL, options: nil)
+            return [attachment]
+        } catch let error {
+            print("\(error.localizedDescription)")
+        }
+        
+        return []
     }
 }
 

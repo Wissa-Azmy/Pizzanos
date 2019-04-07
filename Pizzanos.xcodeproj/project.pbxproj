@@ -12,6 +12,16 @@
 		29A4EC9B2254E44700DD0AB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29A4EC992254E44700DD0AB6 /* Main.storyboard */; };
 		29A4EC9D2254E44800DD0AB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29A4EC9C2254E44800DD0AB6 /* Assets.xcassets */; };
 		29A4ECA02254E44800DD0AB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29A4EC9E2254E44800DD0AB6 /* LaunchScreen.storyboard */; };
+		29A4ECA9225A45D600DD0AB6 /* EHuliUke.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECA7225A45D500DD0AB6 /* EHuliUke.mp3 */; };
+		29A4ECAA225A45D600DD0AB6 /* PizzaMovie.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECA8225A45D600DD0AB6 /* PizzaMovie.mp4 */; };
+		29A4ECB4225A4B1600DD0AB6 /* MakePizza_0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECAC225A4B1300DD0AB6 /* MakePizza_0.jpg */; };
+		29A4ECB5225A4B1600DD0AB6 /* MakePizza_4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECAD225A4B1300DD0AB6 /* MakePizza_4.jpg */; };
+		29A4ECB6225A4B1600DD0AB6 /* MakePizza_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECAE225A4B1400DD0AB6 /* MakePizza_2.jpg */; };
+		29A4ECB7225A4B1600DD0AB6 /* MakePizza_6.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECAF225A4B1400DD0AB6 /* MakePizza_6.jpg */; };
+		29A4ECB8225A4B1600DD0AB6 /* MakePizza_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECB0225A4B1500DD0AB6 /* MakePizza_1.jpg */; };
+		29A4ECB9225A4B1600DD0AB6 /* MakePizza_3.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECB1225A4B1500DD0AB6 /* MakePizza_3.jpg */; };
+		29A4ECBA225A4B1600DD0AB6 /* MakePizza_0.gif in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECB2225A4B1600DD0AB6 /* MakePizza_0.gif */; };
+		29A4ECBB225A4B1600DD0AB6 /* MakePizza_5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 29A4ECB3225A4B1600DD0AB6 /* MakePizza_5.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +32,16 @@
 		29A4EC9C2254E44800DD0AB6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		29A4EC9F2254E44800DD0AB6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		29A4ECA12254E44800DD0AB6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29A4ECA7225A45D500DD0AB6 /* EHuliUke.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = EHuliUke.mp3; sourceTree = "<group>"; };
+		29A4ECA8225A45D600DD0AB6 /* PizzaMovie.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = PizzaMovie.mp4; sourceTree = "<group>"; };
+		29A4ECAC225A4B1300DD0AB6 /* MakePizza_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MakePizza_0.jpg; sourceTree = "<group>"; };
+		29A4ECAD225A4B1300DD0AB6 /* MakePizza_4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MakePizza_4.jpg; sourceTree = "<group>"; };
+		29A4ECAE225A4B1400DD0AB6 /* MakePizza_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MakePizza_2.jpg; sourceTree = "<group>"; };
+		29A4ECAF225A4B1400DD0AB6 /* MakePizza_6.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MakePizza_6.jpg; sourceTree = "<group>"; };
+		29A4ECB0225A4B1500DD0AB6 /* MakePizza_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MakePizza_1.jpg; sourceTree = "<group>"; };
+		29A4ECB1225A4B1500DD0AB6 /* MakePizza_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MakePizza_3.jpg; sourceTree = "<group>"; };
+		29A4ECB2225A4B1600DD0AB6 /* MakePizza_0.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = MakePizza_0.gif; sourceTree = "<group>"; };
+		29A4ECB3225A4B1600DD0AB6 /* MakePizza_5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = MakePizza_5.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				29A4EC952254E44700DD0AB6 /* AppDelegate.swift */,
+				29A4ECAB225A45E000DD0AB6 /* Notification Assets */,
 				29A4EC972254E44700DD0AB6 /* ViewController.swift */,
 				29A4EC992254E44700DD0AB6 /* Main.storyboard */,
 				29A4EC9C2254E44800DD0AB6 /* Assets.xcassets */,
@@ -62,6 +83,23 @@
 				29A4ECA12254E44800DD0AB6 /* Info.plist */,
 			);
 			path = Pizzanos;
+			sourceTree = "<group>";
+		};
+		29A4ECAB225A45E000DD0AB6 /* Notification Assets */ = {
+			isa = PBXGroup;
+			children = (
+				29A4ECA7225A45D500DD0AB6 /* EHuliUke.mp3 */,
+				29A4ECA8225A45D600DD0AB6 /* PizzaMovie.mp4 */,
+				29A4ECB2225A4B1600DD0AB6 /* MakePizza_0.gif */,
+				29A4ECAC225A4B1300DD0AB6 /* MakePizza_0.jpg */,
+				29A4ECB0225A4B1500DD0AB6 /* MakePizza_1.jpg */,
+				29A4ECAE225A4B1400DD0AB6 /* MakePizza_2.jpg */,
+				29A4ECB1225A4B1500DD0AB6 /* MakePizza_3.jpg */,
+				29A4ECAD225A4B1300DD0AB6 /* MakePizza_4.jpg */,
+				29A4ECB3225A4B1600DD0AB6 /* MakePizza_5.jpg */,
+				29A4ECAF225A4B1400DD0AB6 /* MakePizza_6.jpg */,
+			);
+			path = "Notification Assets";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,7 +161,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				29A4ECA02254E44800DD0AB6 /* LaunchScreen.storyboard in Resources */,
+				29A4ECB4225A4B1600DD0AB6 /* MakePizza_0.jpg in Resources */,
+				29A4ECAA225A45D600DD0AB6 /* PizzaMovie.mp4 in Resources */,
+				29A4ECB6225A4B1600DD0AB6 /* MakePizza_2.jpg in Resources */,
+				29A4ECBB225A4B1600DD0AB6 /* MakePizza_5.jpg in Resources */,
+				29A4ECB7225A4B1600DD0AB6 /* MakePizza_6.jpg in Resources */,
 				29A4EC9D2254E44800DD0AB6 /* Assets.xcassets in Resources */,
+				29A4ECB5225A4B1600DD0AB6 /* MakePizza_4.jpg in Resources */,
+				29A4ECA9225A45D600DD0AB6 /* EHuliUke.mp3 in Resources */,
+				29A4ECB9225A4B1600DD0AB6 /* MakePizza_3.jpg in Resources */,
+				29A4ECB8225A4B1600DD0AB6 /* MakePizza_1.jpg in Resources */,
+				29A4ECBA225A4B1600DD0AB6 /* MakePizza_0.gif in Resources */,
 				29A4EC9B2254E44700DD0AB6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
